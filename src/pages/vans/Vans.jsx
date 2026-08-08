@@ -11,10 +11,14 @@ export default function Vans() {
   //   localStorage.setItem("vansList", vansList);
   const vans = vansList.map((van) => {
     return (
-      <Link key={van.id} to={`/vans/${van.id}`}>
-        <div className="vans-tile">
-          <img src={van.imageUrl} alt="van-image"></img>
-          <div>
+      <div key={van.id} className="vans-tile">
+        <Link to={`/vans/${van.id}`}>
+          <img
+            className="vans-tile-img"
+            src={van.imageUrl}
+            alt="van-image"
+          ></img>
+          <div className="vans-tile-attr">
             <span className="vans-attr">{van.name}</span>
             <span className="vans-attr">
               {van.price}$<span>/day</span>
@@ -28,8 +32,8 @@ export default function Vans() {
           >
             {van.type.charAt(0).toUpperCase() + van.type.slice(1).toLowerCase()}
           </span>
-        </div>
-      </Link>
+        </Link>
+      </div>
     );
   });
 

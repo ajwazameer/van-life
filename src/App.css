@@ -193,7 +193,7 @@ header a:hover {
   text-decoration-line: underline;
   color: #4d4d4d;
 }
-.vans-tile > img {
+.vans-tile-img {
   border-radius: 5px;
   width: 100%;
   max-width: 172px;
@@ -215,7 +215,11 @@ header a:hover {
   width: 100%;
   max-width: 172px;
 }
-.vans-tile > div {
+.vans-tile a {
+  color: #161616;
+  text-decoration: none;
+}
+.vans-tile-attr {
   padding-top: 5px;
   display: flex;
   justify-content: space-between;

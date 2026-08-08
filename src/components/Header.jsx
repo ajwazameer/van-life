@@ -7,6 +7,7 @@ export default function Header() {
         {/* <img src="./assets/logog.svg" alt="vanlife-logo" /> */}
       </Link>
       <nav>
+        <Link to="/host">Host</Link>
         <Link to="/about">About</Link>
         <Link to="/vans">Vans</Link>
       </nav>
