@@ -9,14 +9,25 @@ body {
   background-color: #fff7ed;
   font-family: "Inter", sans-serif;
 }
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
 body::-webkit-scrollbar {
   display: none;
 }
 
 body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+main {
+  flex: 1;
 }
 
 header {
@@ -357,4 +368,43 @@ i[class*="van-type-"] {
   text-decoration: underline;
   background-color: transparent;
   color: #4d4d4d;
+}
+
+/* Host navbar */
+
+.host-nav {
+  display: flex;
+}
+
+.host-nav a {
+  text-decoration: none;
+  color: #4d4d4d;
+  font-weight: 500;
+  padding: 5px 20px;
+}
+
+.host-nav a:hover {
+  color: #161616;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+/* footer */
+
+footer {
+  background-color: #252525;
+  color: #aaaaaa;
+  width: 100%;
+  text-align: center;
+  font-weight: 500;
+  padding: 18px;
+  font-size: 1rem;
+  margin-top: auto;
+}
+
+/* Active styles for navlink */
+.active-styles {
+  font-weight: bold;
+  text-decoration: underline;
+  color: #161616;
 }
