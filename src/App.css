@@ -185,36 +185,25 @@ header a:hover {
   justify-content: flex-start;
   gap: 10px;
 }
-.filter-buttons > span {
-  background-color: #ffead0;
-  border-radius: 5px;
-  padding: 4px 12px;
 
-  /* Text */
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  text-align: center;
-  color: #4d4d4d;
-}
 .filter-section {
-  padding: 0 18.4px;
+  max-width: 350px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  gap: 52px;
+  gap: 32px;
 }
-.filter-section > button {
+.filter-section > a {
   /* Text */
-  border: none;
-  text-wrap: none;
   background-color: inherit;
   font-style: normal;
-  font-weight: 700;
+  width: 100%;
+  font-weight: 500;
   font-size: 14px;
   text-decoration-line: underline;
   color: #4d4d4d;
 }
+
 .vans-tile-img {
   border-radius: 5px;
   width: 100%;
@@ -247,21 +236,43 @@ header a:hover {
   justify-content: space-between;
 }
 .vans-type {
-  background-color: #e17654;
+  background-color: #ffead0;
   border-radius: 5px;
   padding: 4px 12px;
 
   /* Text */
-  font-weight: 600;
-  font-size: 14px;
+  font-weight: 500;
+  font-size: 16px;
   text-align: center;
+  color: #4d4d4d;
+  transition: 200ms all cubic-bezier(0.4, 0, 0.2, 1);
+}
+.vans-type.sim:hover {
+  background-color: #e17654;
+  color: #ffead0;
+  text-decoration: none;
+}
+.vans-type.rugg:hover {
+  background-color: #115e59;
+  color: #ffead0;
+  text-decoration: none;
+}
+.vans-type.lux:hover {
+  background-color: #161616;
+  color: #ffead0;
+  text-decoration: none;
+}
+.simple {
+  background-color: #e17654;
   color: #ffead0;
 }
 .rugged {
   background-color: #115e59;
+  color: #ffead0;
 }
 .luxury {
   background-color: #161616;
+  color: #ffead0;
 }
 .vans-catalog {
   display: flex;
