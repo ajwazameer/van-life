@@ -1,28 +1,23 @@
 import clsx from "clsx";
 import { useState, useEffect } from "react";
-import { Link, useSearchParams, NavLink } from "react-router-dom";
+import {
+  Link,
+  useSearchParams,
+  NavLink,
+  useLoaderData,
+} from "react-router-dom";
 import { getVans } from "../../api";
+
+export function loader() {
+  return getVans();
+}
+
 export default function Vans() {
-  const [vansList, setVanList] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const typeFilter = searchParams.get("type");
-  console.log(typeFilter);
-  useEffect(() => {
-    async function loadVans() {
-      setLoading(true);
-      try {
-        const data = await getVans();
-        setVanList(data);
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    loadVans();
-  }, []);
+  const vansList = useLoaderData();
+
   const filteredList = typeFilter
     ? vansList.filter((van) => van.type.toLowerCase() === typeFilter)
     : vansList;
@@ -54,10 +49,6 @@ export default function Vans() {
       </div>
     );
   });
-
-  if (loading) {
-    return <h1>Loading....</h1>;
-  }
   if (error) {
     return <h1>There was an error: {error.message}</h1>;
   }
