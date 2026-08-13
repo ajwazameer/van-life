@@ -22,6 +22,7 @@ import HostVanPhotos from "./pages/host/HostVanPhotos";
 import HostVanPricing from "./pages/host/HostVanPricing";
 import NotFound from "./pages/NotFound";
 import Error from "./components/Error";
+import Login from "./pages/Login";
 import "./App.css";
 import "/server";
 const router = createBrowserRouter(
@@ -35,6 +36,7 @@ const router = createBrowserRouter(
         loader={VansPageLoader}
         errorElement={<Error />}
       />
+      <Route path="login" element={<Login />} />
       <Route path="vans/:id" element={<VanDetail />} />
 
       <Route path="host" element={<HostLayout />}>
