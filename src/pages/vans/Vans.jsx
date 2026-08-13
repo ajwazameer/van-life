@@ -1,15 +1,27 @@
 import clsx from "clsx";
 import { useState, useEffect } from "react";
 import { Link, useSearchParams, NavLink } from "react-router-dom";
+import { getVans } from "../../api";
 export default function Vans() {
   const [vansList, setVanList] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const typeFilter = searchParams.get("type");
   console.log(typeFilter);
   useEffect(() => {
-    fetch("/api/vans")
-      .then((res) => res.json())
-      .then((data) => setVanList(data.vans));
+    async function loadVans() {
+      setLoading(true);
+      try {
+        const data = await getVans();
+        setVanList(data);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadVans();
   }, []);
   const filteredList = typeFilter
     ? vansList.filter((van) => van.type.toLowerCase() === typeFilter)
@@ -17,7 +29,7 @@ export default function Vans() {
   const vans = filteredList.map((van) => {
     return (
       <div key={van.id} className="vans-tile">
-        <Link to={`/vans/${van.id}`}>
+        <Link to={van.id} state={{ search: searchParams.toString() }}>
           <img
             className="vans-tile-img"
             src={van.imageUrl}
@@ -43,25 +55,43 @@ export default function Vans() {
     );
   });
 
+  if (loading) {
+    return <h1>Loading....</h1>;
+  }
+  if (error) {
+    return <h1>There was an error: {error.message}</h1>;
+  }
+
   return (
     <section className="vans-section">
       <header>
         <h1>Explore our van options</h1>
         <div className="filter-section">
           <div className="filter-buttons">
-            <NavLink to="?type=simple" className="vans-type sim">
+            <button
+              onClick={() => setSearchParams({ type: "simple" })}
+              className={`vans-type sim ${typeFilter === "simple" ? "simple" : ""}`}
+            >
               <span>Simple</span>
-            </NavLink>
-            <NavLink to="?type=rugged" className="vans-type rugg">
+            </button>
+            <button
+              onClick={() => setSearchParams({ type: "rugged" })}
+              className={`vans-type rugg ${typeFilter === "rugged" ? "rugged" : ""}`}
+            >
               <span>Rugged</span>
-            </NavLink>
-            <NavLink to="?type=luxury" className="vans-type lux">
+            </button>
+            <button
+              onClick={() => setSearchParams({ type: "luxury" })}
+              className={`vans-type lux ${typeFilter === "luxury" ? "luxury" : ""}`}
+            >
               <span>Luxury</span>
-            </NavLink>
+            </button>
           </div>
-          <Link to=".">
-            <span>Clear Filters</span>
-          </Link>
+          {typeFilter && (
+            <button onClick={() => setSearchParams({})}>
+              <span>Clear Filters</span>
+            </button>
+          )}
         </div>
       </header>
 

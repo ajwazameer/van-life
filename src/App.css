@@ -193,13 +193,15 @@ header a:hover {
   align-items: center;
   gap: 32px;
 }
-.filter-section > a {
+.filter-section > button {
   /* Text */
+  cursor: pointer;
   background-color: inherit;
+  white-space: nowrap;
+  border: none;
   font-style: normal;
-  width: 100%;
-  font-weight: 500;
   font-size: 14px;
+  font-weight: 500;
   text-decoration-line: underline;
   color: #4d4d4d;
 }
@@ -239,13 +241,14 @@ header a:hover {
   background-color: #ffead0;
   border-radius: 5px;
   padding: 4px 12px;
-
+  border: none;
   /* Text */
   font-weight: 500;
   font-size: 16px;
   text-align: center;
   color: #4d4d4d;
   transition: 200ms all cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
 }
 .vans-type.sim:hover {
   background-color: #e17654;
@@ -551,4 +554,14 @@ a.active-styles {
 .host-van-detail-image {
   height: 100px;
   border-radius: 5px;
+}
+/* Not Found Page */
+.not-found-container {
+  padding-inline: 26px;
+}
+
+.not-found-container .link-button {
+  width: 100%;
+  background-color: #161616;
+  color: white;
 }
