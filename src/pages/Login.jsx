@@ -25,14 +25,16 @@ export default function Login() {
           name="email"
           placeholder="Email address"
           value={loginFormData.email}
+          onChange={handleChange}
         />
         <input
           type="password"
           name="password"
           placeholder="Password"
           value={loginFormData.password}
+          onChange={handleChange}
         />
-        <button>Log in</button>
+        <button onClick={handleSubmit}>Log in</button>
       </form>
     </section>
   );
