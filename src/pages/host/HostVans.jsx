@@ -3,18 +3,12 @@ import { Link, useLoaderData } from "react-router-dom";
 import { getHostVans } from "../../api";
 import { requireAuth } from "../../utils";
 
-export async function loader() {
-  await requireAuth();
+export async function loader({ request }) {
+  await requireAuth(request);
   return getHostVans();
 }
 export default function HostVans() {
   const hostVans = useLoaderData();
-  // const [hostVans, setHostVans] = useState([]);
-  // useEffect(() => {
-  //   fetch("/api/host/vans")
-  //     .then((res) => res.json())
-  //     .then((data) => setHostVans(data.vans));
-  // }, []);
 
   const hostVansList = hostVans.map((van) => {
     return (
