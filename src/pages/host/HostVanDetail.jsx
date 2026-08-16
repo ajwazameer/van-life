@@ -5,35 +5,25 @@ import {
   NavLink,
   useOutletContext,
   useLoaderData,
+  Await,
 } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { getHostVans } from "../../api";
 import { requireAuth } from "../../utils";
 export async function loader({ params, request }) {
   await requireAuth(request);
-  return getHostVans(params.id);
+  return { currentVan: getHostVans(params.id) };
 }
 export default function HostVanDetail() {
-  // const { id } = useParams();
-  // const [currentVan, setCurrentVan] = useState(null);
+  const data = useLoaderData();
 
-  // useEffect(() => {
-  //   fetch(`/api/host/vans/${id}`)
-  //     .then((res) => res.json())
-  //     .then((data) => setCurrentVan(data.vans));
-  // }, []);
-  const currentVan = useLoaderData();
-  console.log(currentVan);
   const activeStyles = {
     fontWeight: "bold",
     textDecoration: "underline",
     color: "#161616",
   };
-  return (
-    <section>
-      <Link to=".." relative="path" className="back-button">
-        &larr; <span>Back to all vans</span>
-      </Link>
+  function renderHostVan(currentVan) {
+    return (
       <div className="host-van-detail-layout-container">
         <div className="host-van-detail">
           <img src={currentVan.imageUrl} />
@@ -68,6 +58,16 @@ export default function HostVanDetail() {
         </nav>
         <Outlet context={{ currentVan }} />
       </div>
+    );
+  }
+  return (
+    <section>
+      <Link to=".." relative="path" className="back-button">
+        &larr; <span>Back to all vans</span>
+      </Link>
+      <Suspense fallback={<h2>Loading van....</h2>}>
+        <Await resolve={data.currentVan}>{renderHostVan}</Await>
+      </Suspense>
     </section>
   );
 }
