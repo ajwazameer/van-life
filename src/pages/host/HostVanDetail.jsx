@@ -8,11 +8,11 @@ import {
   Await,
 } from "react-router-dom";
 import { useState, useEffect, Suspense } from "react";
-import { getHostVans } from "../../api";
+import { getVan } from "../../api";
 import { requireAuth } from "../../utils";
 export async function loader({ params, request }) {
   await requireAuth(request);
-  return { currentVan: getHostVans(params.id) };
+  return { currentVan: getVan(params.id) };
 }
 export default function HostVanDetail() {
   const data = useLoaderData();

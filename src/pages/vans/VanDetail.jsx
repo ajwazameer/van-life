@@ -6,10 +6,10 @@ import {
   Await,
 } from "react-router-dom";
 import { useEffect, useState, Suspense } from "react";
-import { getVans } from "../../api";
+import { getVan } from "../../api";
 
 export function loader({ params }) {
-  return { van: getVans(params.id) };
+  return { van: getVan(params.id) };
 }
 export default function VanDetail() {
   // const params = useParams();
