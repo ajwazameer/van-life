@@ -24,10 +24,14 @@ import HostVanPhotos from "./pages/host/HostVanPhotos";
 import HostVanPricing from "./pages/host/HostVanPricing";
 import NotFound from "./pages/NotFound";
 import Error from "./components/Error";
-import Login from "./pages/Login";
+import Login, {
+  loader as loginLoader,
+  action as loginAction,
+} from "./pages/Login";
 import { requireAuth } from "./utils";
 import "./App.css";
 import "/server";
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
@@ -39,10 +43,15 @@ const router = createBrowserRouter(
         loader={vansPageLoader}
         errorElement={<Error />}
       />
-      <Route path="login" element={<Login />} />
+      <Route
+        path="login"
+        element={<Login />}
+        loader={loginLoader}
+        action={loginAction}
+      />
       <Route path="vans/:id" element={<VanDetail />} loader={vanDetailLoader} />
 
-      <Route path="host" element={<HostLayout />}>
+      <Route path="host" element={<HostLayout />} errorElement={<Error />}>
         <Route
           index
           element={<Dashboard />}
@@ -64,20 +73,31 @@ const router = createBrowserRouter(
             return await requireAuth();
           }}
         />
-        <Route path="vans" element={<HostVans />} loader={hostVanLoader} />
+        <Route
+          path="vans"
+          element={<HostVans />}
+          loader={hostVanLoader}
+          errorElement={<Error />}
+        />
 
         <Route
           path="vans/:id"
           element={<HostVanDetail />}
           loader={hostVanDetailLoader}
         >
-          <Route index element={<HostVanInfo />} />
+          <Route
+            index
+            element={<HostVanInfo />}
+            loader={async () => {
+              return await requireAuth();
+            }}
+          />
           <Route
             path="pricing"
             element={
               <HostVanPricing
                 loader={async () => {
-                  return null;
+                  return await requireAuth();
                 }}
               />
             }
@@ -86,7 +106,7 @@ const router = createBrowserRouter(
             path="photos"
             element={<HostVanPhotos />}
             loader={async () => {
-              return null;
+              return await requireAuth();
             }}
           />
         </Route>
