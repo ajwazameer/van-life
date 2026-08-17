@@ -32,7 +32,7 @@ import Login, {
 } from "./pages/Login";
 import { requireAuth } from "./utils";
 import "./App.css";
-// import "/server";
+import "/server";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
