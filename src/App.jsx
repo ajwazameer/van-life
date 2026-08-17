@@ -59,7 +59,7 @@ const router = createBrowserRouter(
         errorElement={<Error />}
       />
 
-      <Route path="host" element={<HostLayout />}>
+      <Route path="host" element={<HostLayout />} errorElement={<Error />}>
         <Route index element={<Dashboard />} loader={hostDashboardLoader} />
         <Route
           path="income"
